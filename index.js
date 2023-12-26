@@ -10,6 +10,10 @@ var fs = require('fs');
 var express = require('express');
 var app = express();
 
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'views')));
+
+
 if (!process.env.DISABLE_XORIGIN) {
   app.use(function(req, res, next) {
     var allowedOrigins = ['https://narrow-plane.gomix.me', 'https://www.freecodecamp.com'];
@@ -24,6 +28,13 @@ if (!process.env.DISABLE_XORIGIN) {
 }
 
 app.use('/public', express.static(process.cwd() + '/public'));
+app.use(express.static('public')); // If your HTML files are in a public directory
+
+app.set('views', path.join(__dirname, 'views'));
+//app.set('view engine', 'ejs'); // replace 'ejs' with whatever engine you're using
+
+//app.set('views', './views'); // Set the correct path for views
+app.set('view engine', 'ejs'); // Example if you're using EJS
 
 app.route('/_api/package.json')
   .get(function(req, res, next) {
