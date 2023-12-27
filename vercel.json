@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "author": "Simeon Ayendi",
+    
     "builds": [
       { "src": "index.js", "use": "@vercel/node" }
     ]
